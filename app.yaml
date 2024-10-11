@@ -1,0 +1,14 @@
+runtime: python39
+entrypoint: gunicorn -b :$PORT truche:app
+instance_class: F4
+env_variables:
+  FLASK_ENV: production
+  SECRET_KEY: 'your-secret-key'
+  DB_HOST: '34.16.53.160'  
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 10
+handlers:
+- url: /.*
+  script: auto
