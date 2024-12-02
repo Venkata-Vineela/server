@@ -29,9 +29,9 @@ app.secret_key = os.environ.get('SECRET_KEY', 'your-secret-key')
 def initialize_database():
     # conn = sqlite3.connect('../tmp/data/user_data.db')
     conn = mysql.connector.connect(
-        user='root',
-        password='',
-        host=os.environ.get('DB_HOST', '34.16.53.160')
+        user='admin',  
+        password='tricslab-admin-password',  
+        host=os.environ.get('DB_HOST', '34.28.173.34')
     )
 
     cursor = conn.cursor()
