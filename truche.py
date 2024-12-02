@@ -44,52 +44,57 @@ def initialize_database():
 
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
-            id INTEGER PRIMARY KEY,
-            firstname TEXT,
-            lastname TEXT,
-            username TEXT UNIQUE,
-            password TEXT,
-            phone TEXT,
-            organization TEXT,
-            street_address TEXT,
-            city TEXT,
-            state TEXT,
-            zipcode TEXT
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            firstname VARCHAR(255),
+            lastname VARCHAR(255),
+            username VARCHAR(255) UNIQUE,
+            password VARCHAR(255),
+            phone VARCHAR(15),
+            organization VARCHAR(255),
+            street_address VARCHAR(255),
+            city VARCHAR(255),
+            state VARCHAR(255),
+            zipcode VARCHAR(10)
         )
     ''')
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS friends (
-            username TEXT,
-            friendusername TEXT,
+            username VARCHAR(255),
+            friendusername VARCHAR(255),
+            PRIMARY KEY (username, friendusername),
+            FOREIGN KEY (username) REFERENCES users(username),
+            FOREIGN KEY (friendusername) REFERENCES users(username)
+            )
+    ''')
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS friendrequests (
+            username VARCHAR(255),
+            friendusername VARCHAR(255),
             PRIMARY KEY (username, friendusername),
             FOREIGN KEY (username) REFERENCES users(username),
             FOREIGN KEY (friendusername) REFERENCES users(username)
         )
-    ''')
-
-    cursor.execute('''
-            CREATE TABLE IF NOT EXISTS friendrequests (
-                username TEXT,
-                friendusername TEXT,
-                PRIMARY KEY (username, friendusername),
-                FOREIGN KEY (username) REFERENCES users(username),
-                FOREIGN KEY (friendusername) REFERENCES users(username)
-            )
         ''')
 
     cursor.execute('''
             CREATE TABLE IF NOT EXISTS posts (
-                username TEXT,
+                username VARCHAR(255),
                 postnumber INT,
                 text TEXT,
                 file_data TEXT,
-                file_name TEXT,
-                file_type TEXT,
-                visibility TEXT,
-                PRIMARY KEY (username,postnumber),
+                file_name VARCHAR(255),
+                file_type VARCHAR(255),
+                visibility VARCHAR(50),
+                PRIMARY KEY (username, postnumber),
                 FOREIGN KEY (username) REFERENCES users(username)
             )
         ''')
+    
+
+   
+
+    
 
 
     conn.commit()
