@@ -3,11 +3,11 @@ import mysql.connector
 import os
 
 def get_db_connection():
-    connection = mysql.connector.connect(
-        user='root',  # Default MySQL user
-        password='',  # No password
-        host=os.environ.get('DB_HOST', '34.16.53.160'),  # Use the public IP address
-        database=os.environ.get('DB_NAME', '')  # Leave blank if not created yet
+    connection = mariadb.connect(
+        user='admin',  
+        password='tricslab-admin-password',  
+        host=os.environ.get('DB_HOST', '34.28.173.34'),  # Use the public IP address
+        database='truche_db' # Leave blank if not created yet
     )
     return connection
 
